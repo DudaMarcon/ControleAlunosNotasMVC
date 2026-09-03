@@ -39,8 +39,8 @@ O sistema permite cadastrar alunos, registrar notas por disciplina e consultar o
 
 - **C#** — Linguagem de programação
 - **ASP.NET Core MVC** — Desenvolvimento da aplicação web
-- **Entity Framework Core** — Comunicação com o banco de dados
 - **SQLite** — Banco de dados
+- **Entity Framework Core** — Comunicação com o banco de dados
 - **HTML e CSS** — Estrutura e estilização das páginas
 - **Bootstrap** — Interface e componentes visuais
 - **Git e GitHub** — Controle de versão
