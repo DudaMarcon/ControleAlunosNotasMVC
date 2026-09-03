@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+
+alunos.db-shm
+alunos.db-wal

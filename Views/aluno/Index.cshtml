@@ -1,0 +1,50 @@
+﻿@model List<Sistema_notaAluno.Models.Aluno>
+
+@{
+    ViewData["Title"] = "Sistema de alunos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a asp-action="Criar" class="btn btn-primary mb-3">
+    Cadastrar Aluno
+</a>
+
+<p>Sistema de alunos</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Turma</th>
+            <th>Curso</th>
+            <th>Status</th>
+            <th>Matricula</th>
+            <th>Boletim</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@aluno.Id</td>
+                <td>@aluno.Nome</td>
+                <td>@aluno.Turma</td>
+                <td>@aluno.Curso</td>
+                <td>@aluno.Status</td>
+                <td>@aluno.Matricula</td>
+
+                <td>
+                    <a asp-controller="Aluno" 
+                        asp-action="Detalhes" 
+                        asp-route-id="@aluno.Id" 
+                        class="btn btn-primary btn-sm">
+                        Ver Boletim
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
