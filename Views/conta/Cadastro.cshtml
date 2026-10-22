@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Criar Nova Conta</h2>
+
+                <form asp-action="Cadastro" method="post">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Tipo de Conta</label>
+                        <select name="tipo" class="form-control" required>
+                            <option value="">Selecione...</option>
+                            <option value="Aluno">Aluno</option>
+                            <option value="Professor">Professor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">E-mail</label>
+                        <input type="email" name="email" class="form-control" placeholder="seu-email@exemplo.com" required />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="control-label">Senha</label>
+                        <input type="password" name="senha" class="form-control" placeholder="Escolha uma senha" required />
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <a asp-action="Login" class="text-decoration-none">Já tem uma conta? Faça login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+@model Sistema_notaAluno.ViewModels.CriarAlunoViewModel
+
+@{
+    ViewData["Title"] = "Cadastrar Aluno";
+}
+
+<h1>Cadastrar Aluno</h1>
+
+<form asp-action="Criar" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Nome" class="form-label">Nome</label>
+        <input asp-for="Nome" class="form-control" />
+        <span asp-validation-for="Nome" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Turma" class="form-label">Turma</label>
+        <input asp-for="Turma" class="form-control" />
+        <span asp-validation-for="Turma" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Matricula" class="form-label">Matrícula</label>
+        <input asp-for="Matricula" class="form-control" />
+        <span asp-validation-for="Matricula" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">Status</label>
+        <select asp-for="Status" class="form-select">
+        <option value="">Selecione o status</option>
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+    </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Curso" class="form-label">Curso</label>
+        <input asp-for="Curso" class="form-control" />
+        <span asp-validation-for="Curso" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
