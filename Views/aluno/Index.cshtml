@@ -5,26 +5,29 @@
     ViewData["Title"] = "Sistema de alunos";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1>Alunos</h1>
+        <p class="mb-0">Consulte os estudantes, filtre os registros e acesse os boletins.</p>
+    </div>
 
-<a asp-action="Criar" class="btn btn-primary mb-3">
-    Cadastrar Aluno
-</a>
+    <a asp-action="Criar" class="btn btn-primary">
+        + Cadastrar aluno
+    </a>
+</div>
 
-<!-- Formulário de busca e filtros -->
 <div class="card mb-4">
-    <div class="card-header">
-        <h5 class="mb-0">Buscar e filtrar alunos</h5>
+    <div class="card-header d-flex align-items-center gap-2">
+        <span aria-hidden="true">⌕</span>
+        <h5>Buscar e filtrar alunos</h5>
     </div>
 
     <div class="card-body">
         <form asp-controller="Aluno" asp-action="Index" method="get">
             <div class="row g-3">
 
-                <div class="col-md-6">
-                    <label for="busca" class="form-label">
-                        Nome ou matrícula
-                    </label>
+                <div class="col-12 col-md-6">
+                    <label for="busca" class="form-label">Nome ou matrícula</label>
                     <input type="text"
                            id="busca"
                            name="busca"
@@ -33,48 +36,39 @@
                            placeholder="Digite o nome ou a matrícula" />
                 </div>
 
-                <div class="col-md-6">
-                    <label for="turma" class="form-label">
-                        Turma
-                    </label>
+                <div class="col-12 col-md-6">
+                    <label for="turma" class="form-label">Turma</label>
                     <select id="turma" name="turma" class="form-select">
                         <option value="">Todas as turmas</option>
                         @foreach (var item in ViewBag.Turmas)
                         {
-                            <option value="@item"
-                                    selected="@(ViewBag.Turma == item)">
+                            <option value="@item" selected="@(ViewBag.Turma == item)">
                                 @item
                             </option>
                         }
                     </select>
                 </div>
 
-                <div class="col-md-6">
-                    <label for="curso" class="form-label">
-                        Curso
-                    </label>
+                <div class="col-12 col-md-6">
+                    <label for="curso" class="form-label">Curso</label>
                     <select id="curso" name="curso" class="form-select">
                         <option value="">Todos os cursos</option>
                         @foreach (var item in ViewBag.Cursos)
                         {
-                            <option value="@item"
-                                    selected="@(ViewBag.Curso == item)">
+                            <option value="@item" selected="@(ViewBag.Curso == item)">
                                 @item
                             </option>
                         }
                     </select>
                 </div>
 
-                <div class="col-md-6">
-                    <label for="status" class="form-label">
-                        Status
-                    </label>
+                <div class="col-12 col-md-6">
+                    <label for="status" class="form-label">Status</label>
                     <select id="status" name="status" class="form-select">
                         <option value="">Todos os status</option>
                         @foreach (var item in ViewBag.StatusList)
                         {
-                            <option value="@item"
-                                    selected="@(ViewBag.Status == item)">
+                            <option value="@item" selected="@(ViewBag.Status == item)">
                                 @item
                             </option>
                         }
@@ -83,9 +77,9 @@
 
             </div>
 
-            <div class="mt-3">
+            <div class="d-flex flex-wrap gap-2 mt-4">
                 <button type="submit" class="btn btn-primary">
-                    Buscar e filtrar
+                    Buscar alunos
                 </button>
 
                 <a asp-controller="Aluno"
@@ -98,51 +92,62 @@
     </div>
 </div>
 
-<p>Alunos encontrados: @Model.Count</p>
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-3">
+    <h2 class="h5 mb-0">Lista de alunos</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Turma</th>
-            <th>Curso</th>
-            <th>Status</th>
-            <th>Matrícula</th>
-            <th>Boletim</th>
-        </tr>
-    </thead>
+    <span class="badge rounded-pill text-bg-primary px-3 py-2">
+        @Model.Count registro(s)
+    </span>
+</div>
 
-    <tbody>
-        @if (Model.Count > 0)
-        {
-            @foreach (var aluno in Model)
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Turma</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Status</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Boletim</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Count > 0)
+            {
+                @foreach (var aluno in Model)
+                {
+                    <tr>
+                        <td class="text-muted">@aluno.Id</td>
+                        <td class="fw-semibold">@aluno.Nome</td>
+                        <td>@aluno.Turma</td>
+                        <td>@aluno.Curso</td>
+                        <td>@aluno.Status</td>
+                        <td>@aluno.Matricula</td>
+                        <td>
+                            <a asp-controller="Aluno"
+                               asp-action="Detalhes"
+                               asp-route-id="@aluno.Id"
+                               class="btn btn-primary btn-sm">
+                                Ver boletim
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@aluno.Id</td>
-                    <td>@aluno.Nome</td>
-                    <td>@aluno.Turma</td>
-                    <td>@aluno.Curso</td>
-                    <td>@aluno.Status</td>
-                    <td>@aluno.Matricula</td>
-                    <td>
-                        <a asp-controller="Aluno"
-                           asp-action="Detalhes"
-                           asp-route-id="@aluno.Id"
-                           class="btn btn-primary btn-sm">
-                            Ver Boletim
-                        </a>
+                    <td colspan="7" class="text-center py-5">
+                        <div class="fw-semibold mb-1">Nenhum aluno encontrado</div>
+                        <div class="text-muted small">
+                            Tente alterar os filtros ou limpar a busca.
+                        </div>
                     </td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td colspan="7" class="text-center">
-                    Nenhum aluno encontrado com os critérios informados.
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
